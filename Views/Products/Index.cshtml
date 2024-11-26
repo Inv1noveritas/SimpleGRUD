@@ -1,0 +1,49 @@
+﻿@model List<Product>
+@{
+}
+
+<h2 class="text-center mb-5">Товары</h2>
+
+<div class="row mb-5">
+	<div class="col">
+		<a class="btn btn-dark" asp-controller="Products" asp-action="Create">Новый товар</a>
+	</div>
+	<div class="col">
+
+	</div>
+</div>
+
+<table class="table table-hover">
+	<thead class="text-center">
+		<tr>
+			<th>Идентификатор</th>
+			<th>Имя</th>
+			<th>Бренд</th>
+			<th>Категория</th>
+			<th>Цена</th>
+			<th>Изображение</th>
+			<th>Дата создания</th>
+			<th>Действие</th>
+		</tr>
+	</thead>
+	<tbody class="text-center">
+		@foreach (var product in Model)
+		{
+			<tr>
+				<td>@product.Id</td>
+				<td>@product.Name</td>
+				<td>@product.Brand</td>
+				<td>@product.Category</td>
+				<td>@product.Price руб.</td>
+				<td><img src="/products/@product.ImageFileName" width="100" /></td>
+				<td>@product.CreatedAt.ToString("MM/dd/yyyy")</td>
+				<td style="white-space:nowrap">
+					<a class="btn btn-outline-dark btn-sm" asp-controller="Products" asp-action="Edit"
+						asp-route-id="@product.Id">Изменить товар</a>
+					<a class="btn btn-outline-danger btn-sm" asp-controller="Products" asp-action="Delete"
+					   asp-route-id="@product.Id" onclick="return confirm('Вы уверены?')">Удалить товар</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
